@@ -21,7 +21,7 @@ const urlencoder = bodyparser.urlencoded({
     extended: false
 });
 
-const controllers = ['user','datbase'];
+const controllers = ['user'];
 for(var i=0;i<controllers.length;i++){
   const mdl = require('./controller/'+controllers[i]+'Controller');
   mdl.Activate(server);
