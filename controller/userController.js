@@ -30,8 +30,16 @@ server.get('/', function(req, resp){
    resp.render('./pages/index');
 });
 
-server.post('/home-page', function(req, resp){
-   resp.render('./pages/home-page');
+server.post('/home-page', urlencoder,function(req, resp){
+    var user = {type: req.body.type};
+    console.log(req.body.type);
+    if(user === "ADMIN" || user === "admin"){
+            resp.render('./pages/home-page',{type: req.body.type});
+    }
+    else{
+        var user = "edit"
+        resp.render('./pages/home-page',{type: req.body.type});
+    }
 });
 
     

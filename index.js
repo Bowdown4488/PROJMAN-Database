@@ -13,6 +13,7 @@ const server = express();
 //const fs = require('file-system')//for files
 //const multer = require('multer') //for uploading files
 
+server.use(express.json()); 
 server.set('view engine', 'ejs');
 server.use(express.static(__dirname + '/public'));
 server.set('views', path.join(__dirname, 'views'));
