@@ -1,3 +1,4 @@
+const companyModel = require('../model/companyModel');
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000;
@@ -41,6 +42,20 @@ server.post('/home-page', urlencoder,function(req, resp){
         resp.render('./pages/home-page',{type: req.body.type});
     }
 });
+
+server.post('/companyView', urlencoder,function(req, resp){
+//    var form = new formidable.IncomingForm();
+//    form.parse(req, function (err, fields, files) {
+        var company = req.body.company;    
+        console.log("Company: " + req.body.company)
+        companyModel.addCompany(company, function(){ 
+            console.log("Rendering")
+            resp.render('./pages/companyView',{company: company});   
+        });
+//    });
+
+});
+
 
     
 }

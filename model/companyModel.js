@@ -23,4 +23,13 @@ const companyModel = mongoose.model('company', companySchema);
 //  });
 //}
 
-//module.exports.
+function addCompany(company, callback){
+   const instance = companyModel({ companyName: company});
+   console.log("Adding company: " + company);
+   instance.save(function (err, inv) {
+        if(err) return console.error(err);
+        callback();
+  });
+}
+
+module.exports.addCompany = addCompany;
