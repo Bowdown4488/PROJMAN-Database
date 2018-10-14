@@ -28,18 +28,55 @@ const urlencoder = bodyparser.urlencoded({
 });
 
 server.get('/', function(req, resp){
-   resp.render('./pages/index');
+       if(req.session.type !== undefined){
+            console.log("Session is up:" + req.session.type);
+            var user = {type: req.body.type};
+            console.log(req.body.type);
+            if(user === "ADMIN" || user === "admin"){
+                    resp.render('./pages/home-page',{type: req.body.type});
+            }
+            else{
+                var user = "edit"
+                resp.render('./pages/home-page',{type: user});
+            }
+       }
+        else{
+               resp.render('./pages/index');
+        }
+
 });
+    
+server.get('/logout', function(req, resp){
+    console.log("Destroying Session:" + req.session.type);
+    req.session.destroy();
+    resp.redirect('/');
+    });
 
 server.post('/home-page', urlencoder,function(req, resp){
-    var user = {type: req.body.type};
-    console.log(req.body.type);
-    if(user === "ADMIN" || user === "admin"){
-            resp.render('./pages/home-page',{type: req.body.type});
+    if(req.session.type !== undefined){
+        console.log("Session is up:" + req.session.type);
+        var user = {type: req.body.type};
+        console.log(req.body.type);
+        if(user === "ADMIN" || user === "admin"){
+                resp.render('./pages/home-page',{type: req.body.type});
+        }
+        else{
+            var user = "edit"
+            resp.render('./pages/home-page',{type: user});
+        }
     }
     else{
-        var user = "edit"
-        resp.render('./pages/home-page',{type: req.body.type});
+        req.session.type = req.body.type
+        console.log("Making new Session:" + req.session.type);
+        var user = {type: req.body.type};
+        console.log(req.body.type);
+        if(user === "ADMIN" || user === "admin"){
+                resp.render('./pages/home-page',{type: req.body.type});
+        }
+        else{
+            var user = "edit"
+            resp.render('./pages/home-page',{type: user});
+        }
     }
 });
 
