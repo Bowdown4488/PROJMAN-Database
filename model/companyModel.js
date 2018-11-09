@@ -2,7 +2,11 @@ const mongoose = require('./connectionModel').connection;
 
 const companySchema = mongoose.Schema({
 	companyName: String,
-    personDetails:[{
+    companyAddress: String,
+    contactPerson: String,
+    contactPosition: String,
+    contactDetails: String,
+    masterList:[{
        lastName: String,
        firstName: String,
        position: String,
@@ -16,15 +20,15 @@ const companySchema = mongoose.Schema({
 
 const companyModel = mongoose.model('company', companySchema);
 
-//function viewCompany(callback){
-//  companyModel.find({}, function (err, list) {
-//    if(err) return console.error(err);
-//    callback(list);
-//  });
-//}
+function viewCompany(callback){
+  companyModel.find({}, function (err, list) {
+    if(err) return console.error(err);
+    callback(list);
+  });
+}
 
-function addCompany(company, callback){
-   const instance = companyModel({ companyName: company});
+function addCompany(company, address, person, position, rank, details, callback){
+   const instance = companyModel({ companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details});
    console.log("Adding company: " + company);
    instance.save(function (err, inv) {
         if(err) return console.error(err);
@@ -33,3 +37,4 @@ function addCompany(company, callback){
 }
 
 module.exports.addCompany = addCompany;
+module.exports.viewCompany = viewCompany;
