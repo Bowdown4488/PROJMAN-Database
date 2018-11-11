@@ -27,7 +27,7 @@ function viewCompany(callback){
   });
 }
 
-function addCompany(company, address, person, position, rank, details, callback){
+function addCompany(company, address, person, position, details, callback){
    const instance = companyModel({ companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details});
    console.log("Adding company: " + company);
    instance.save(function (err, inv) {
