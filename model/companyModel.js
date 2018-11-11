@@ -6,6 +6,7 @@ const companySchema = mongoose.Schema({
     contactPerson: String,
     contactPosition: String,
     contactDetails: String,
+    taxNumber: String,
     masterList:[{
        lastName: String,
        firstName: String,
@@ -27,8 +28,8 @@ function viewCompany(callback){
   });
 }
 
-function addCompany(company, address, person, position, details, callback){
-   const instance = companyModel({ companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details});
+function addCompany(company, address, person, position, details, taxNumber, callback){
+   const instance = companyModel({ companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details, taxNumber:taxNumber});
    console.log("Adding company: " + company);
    instance.save(function (err, inv) {
         if(err) return console.error(err);

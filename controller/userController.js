@@ -102,8 +102,9 @@ server.post('/companyView', urlencoder,function(req, resp){
         var person = req.body.person;
         var position = req.body.position;
         var details = req.body.details;
+        var taxNumber = req.body.taxNumber;
         console.log("Company: " + company)
-        companyModel.addCompany(company, address, person, position, details, function(){ 
+        companyModel.addCompany(company, address, person, position, details, taxNumber, function(){ 
             console.log("Rendering")
             resp.render('./pages/companyView',{company: company});   
         });
