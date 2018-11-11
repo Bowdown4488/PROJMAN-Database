@@ -37,5 +37,12 @@ function addCompany(company, address, person, position, details, taxNumber, call
   });
 }
 
+function findCompany(companyName){
+   return companyModel.findOne({companyName: companyName});
+}
+
+
+
 module.exports.addCompany = addCompany;
 module.exports.viewCompany = viewCompany;
+module.exports.findCompany = findCompany;

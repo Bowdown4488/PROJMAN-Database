@@ -9,6 +9,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>   
+       
+    .panel {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .panel-group {
+      margin: auto;
+    }
+
+    .panel-body {
+      align-content: center;
+      justify-content: center;
+      padding: 2px;
+      height: 100%;
+      max-height: 450px;
+      position: relative;
+    }
+        
+    .panel-footer {
+      position: absolute;
+      bottom: 0;
+      height: 25px;
+      width: 99%;
+      max-height: 50px;
+      padding: 0px;
+    }
+        
+    .panel-heading {
+      size: 20%;
+      height: 80px;
+    }
     </style> 
     
     <script>
@@ -69,25 +101,34 @@
           </div>
         </div>
       </div>
-    
-    <div class="container-fluid text-center">    
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-            </div>
-              <div class="main-header ">
+     <div class="container-fluid text-center">    
+          <div class="main-header ">
                 <div><h2>TEST</h2></div>
                 <h1 style="font-size: 70px;">HOME PAGE STUFF</h1>
-                    <button type="button" class="btn btn-default btn-lg" id="company-button">NEW COMPANY</button>
+                <button type="button" class="btn btn-default btn-lg" id="company-button">NEW COMPANY</button>
+          </div>
+      </div>
+    
+    <div class="container bg-3" style="width: 1500px;">
+       
+            <div class="row content">
+                 <% for(var i=0;i<data.list.length;i++){ %>
+                <div class="col-sm-2 sidenav">
+                </div>
               </div>
-            
-              <div class="companies">
-                    <% for(var i=0;i<data.list.length;i++){ %>
+            <div class="panel panel-default" style="height: 530px;">
+              <div class="panel-heading">  
+                    <div class="companies">
                         <h3>Company: <%= data.list[i].companyName %></h3><br />
-                    <% } %>
+                  </div>   
               </div>
-            
-        </div>
+              <div class="panel-body">
+               <a href="/companyView/<%= data.list[i].companyName %>" type = "button" class = "btn btn-warning btn-xs btn-block" style="background-color: purple;" >View Company</a>            
+              </div> 
+            </div>
+         <% } %>  
     </div>
+  
 
 </body>
 </html>

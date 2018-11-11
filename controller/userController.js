@@ -109,7 +109,17 @@ server.post('/companyView', urlencoder,function(req, resp){
             resp.render('./pages/companyView',{company: company});   
         });
 //    });
-
+});
+    
+server.get('/companyView/:company', function(req, resp){
+    console.log("Title passed: " + req.params.company);
+    var findCompany = companyModel.findCompany(req.params.company);
+    findCompany.then((foundCompany)=>
+    {
+        console.log("Company Found: " + foundCompany.companyName);
+        var company = foundCompany.companyName;
+        resp.render('./pages/companyView',{company: company});  
+    })
 });
 
 
