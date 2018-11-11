@@ -20,8 +20,8 @@ server.use(session({
   saveUninitialized: true,
   cookie: {
           maxAge: 1000 * 60 * 60 * 24 * 7   //Cookie Time
-}
-}))
+  }
+  }))
     
 const urlencoder = bodyparser.urlencoded({
     extended: false

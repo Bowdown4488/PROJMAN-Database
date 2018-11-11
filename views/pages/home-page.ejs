@@ -33,7 +33,13 @@
       size: 20%;
       height: 80px;
     }
+        
+    .edit-span {
+      float: right;
+    }
     </style> 
+    
+    
     
     <script>
       $(document).ready(function(){
@@ -110,7 +116,15 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">  
                             <div class="companies">
-                                <h3>Company: <%= data.list[i].companyName %></h3><br />
+                                <span class = "lead"><h3 style="float: left">Company: <%= data.list[i].companyName %></h3></span>
+                                <span class = "edit-span">
+                                <a href="#" class="glyphicon glyphicon-edit">
+                                 Edit
+                                </a></span>
+                                <span class = "edit-span">
+                                <a href="#" class="glyphicon glyphicon-trash">
+                                 Delete   ~
+                                </a></span>
                             </div>   
                         </div>
                         <div class="panel-body">
