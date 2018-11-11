@@ -94,6 +94,28 @@ server.post('/home-page', urlencoder,function(req, resp){
     }
 });
 
+server.get('/home-redirect', urlencoder,function(req, resp){
+    if(req.session.type !== undefined){
+        console.log("Session is up:" + req.session.type);
+        var user = req.session.type;
+        console.log(user);
+        if(user === "ADMIN" || user === "admin"){
+                var admin = "Admin"
+                companyModel.viewCompany(function(list){
+                    const data = { list:list };
+                    resp.render('./pages/home-page',{type: admin, data:data}); 
+                });
+        }
+        else{
+            var user = "edit"
+                companyModel.viewCompany(function(list){
+                    const data = { list:list };
+                    resp.render('./pages/home-page',{type: user, data:data}); 
+                });
+        }
+    }
+});
+
 server.post('/companyView', urlencoder,function(req, resp){
 //    var form = new formidable.IncomingForm();
 //    form.parse(req, function (err, fields, files) {
@@ -118,20 +140,23 @@ server.post('/edit-Company', function(req,resp){
         companyModel.editCompany(fields.oldCompany, fields.company, fields.address, fields.person, fields.position, fields.details, fields.taxNumber);
         console.log("finish update with new company name:" + fields.company);
         
-        if(user === "ADMIN" || user === "admin"){
-            var admin = "Admin"
-            companyModel.viewCompany(function(list){
-                const data = { list:list };
-                    resp.render('./pages/home-page',{type: admin, data:data}); 
-                });
-        }
-        else{
-            var user = "Edit"
-            companyModel.viewCompany(function(list){
-                const data = { list:list };
-                    resp.render('./pages/home-page',{type: user, data:data}); 
-                });
-        }  
+        resp.render('./pages/companyView',{company: fields.company}); 
+//          var user = req.session.type;
+//        
+//        if(user === "ADMIN" || user === "admin"){
+//            var admin = "Admin"
+//            companyModel.viewCompany(function(list){
+//                const data = { list:list };
+//                    resp.render('./pages/home-page',{type: admin, data:data}); 
+//                });
+//        }
+//        else{
+//            var user = "Edit"
+//            companyModel.viewCompany(function(list){
+//                const data = { list:list };
+//                    resp.render('./pages/home-page',{type: user, data:data}); 
+//                });
+//        }  
     });
 }); 
     
