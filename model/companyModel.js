@@ -41,8 +41,16 @@ function findCompany(companyName){
    return companyModel.findOne({companyName: companyName});
 }
 
-
+function deleteCompany(companyName){   
+    var saveName = companyName;
+    var name = findCompany(companyName);
+    companyModel.deleteOne(name, function (err, obj){   
+      if (err) throw err;
+        console.log("Company " + saveName + " deleted");   
+    });
+}
 
 module.exports.addCompany = addCompany;
 module.exports.viewCompany = viewCompany;
 module.exports.findCompany = findCompany;
+module.exports.deleteCompany = deleteCompany;

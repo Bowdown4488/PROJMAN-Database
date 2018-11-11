@@ -118,11 +118,11 @@
                             <div class="companies">
                                 <span class = "lead"><h3 style="float: left">Company: <%= data.list[i].companyName %></h3></span>
                                 <span class = "edit-span">
-                                <a href="#" class="glyphicon glyphicon-edit">
+                                <a href="/editCompany/<%= data.list[i].companyName %>" class="glyphicon glyphicon-edit">
                                  Edit
                                 </a></span>
                                 <span class = "edit-span">
-                                <a href="#" class="glyphicon glyphicon-trash">
+                                <a href="/deleteCompany/<%= data.list[i].companyName %>" class="glyphicon glyphicon-trash">
                                  Delete   ~
                                 </a></span>
                             </div>   

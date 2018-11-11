@@ -121,8 +121,28 @@ server.get('/companyView/:company', function(req, resp){
         resp.render('./pages/companyView',{company: company});  
     })
 });
-
-
+    
+server.get('/deleteCompany/:company', function(req, resp){
+    console.log("Title passed: " + req.params.company);
+    var deleteCompany = companyModel.deleteCompany(req.params.company);
+    console.log("Company To be Deleted: " + req.params.company);
+    console.log(deleteCompany);
+    console.log("test");
+    if(user === "ADMIN" || user === "admin"){
+        var admin = "Admin"
+        companyModel.viewCompany(function(list){
+            const data = { list:list };
+            resp.render('./pages/home-page',{type: admin, data:data}); 
+            });
+        }
+        else{
+        var user = "Edit"
+        companyModel.viewCompany(function(list){
+            const data = { list:list };
+            resp.render('./pages/home-page',{type: user, data:data}); 
+            });
+        }  
+});
     
 }
 
