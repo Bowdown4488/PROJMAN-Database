@@ -141,22 +141,6 @@ server.post('/edit-Company', function(req,resp){
         console.log("finish update with new company name:" + fields.company);
         
         resp.render('./pages/companyView',{company: fields.company}); 
-//          var user = req.session.type;
-//        
-//        if(user === "ADMIN" || user === "admin"){
-//            var admin = "Admin"
-//            companyModel.viewCompany(function(list){
-//                const data = { list:list };
-//                    resp.render('./pages/home-page',{type: admin, data:data}); 
-//                });
-//        }
-//        else{
-//            var user = "Edit"
-//            companyModel.viewCompany(function(list){
-//                const data = { list:list };
-//                    resp.render('./pages/home-page',{type: user, data:data}); 
-//                });
-//        }  
     });
 }); 
     

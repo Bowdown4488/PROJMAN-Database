@@ -8,20 +8,54 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+      $(document).ready(function(){
+        $("#master-button").click(function(){
+            $("#master-modal").modal();
+        });
+      });
+    </script>
+    
     <style>   
     </style>   
 </head>
     
 <body>
     
-    <div class="container-fluid text-center">    
+    <!-- Modal -->
+    <div class="modal fade" id="master-modal" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px; color: black; font-weight: bold;">
+                <button type="button" class="close" data-dismiss="modal" style="size: 30px;">&times;</button>
+                <span> Enter Individuals Details </span>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form action = 'companyView' method="post">
+                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Last Name" /> <br />
+                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's First Name" /> <br />
+                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Position" /> <br />
+                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Gender" /> <br />
+                    <input type="submit" class="btn btn-success btn-block" value = 'Submit' style="background-color: skyblue" /> <br />
+                 </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="container-fluid text-center">  
+        <a href="/home-redirect" class="glyphicon glyphicon-home">HOME </a>
         <div class="row content">
             <div class="col-sm-2 sidenav">
             </div>
               <div class="main-header ">
                 <h1 style="font-size: 70px;">Company:<%=company%></h1>       
               </div>
-         <a href="/home-redirect" class="glyphicon glyphicon-home">HOME </a>
+            <h1 style="font-size: 70px;"> MasterList</h1>       
+            <button type="button" class="btn btn-default btn-lg" id="master-button">NEW ORDER</button>
         </div>
 <!--        <a href="/masterList/" type = "button" class = "btn btn-warning btn-xs btn-block" style="background-color: blue;" >Company Master List</a>  -->
     </div>
