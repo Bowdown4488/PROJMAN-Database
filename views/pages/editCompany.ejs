@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href = '/'>
+    <title>JGE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>   
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+    .jumbotron {
+      color: white;
+      background-color: rebeccapurple;
+    }
+
+    body {
+/*      background-color:antiquewhite;*/
+      padding-top: 70px;
+      color:black;
+    }
+      
+      li{
+          list-style-type:none;
+      }
+      
+      .img{
+          margin-bottom: 10px;
+      }
+      .mid{
+        border-left: 10px dotted  black;
+        border-right: 10px dotted  black;
+        border-top: 10px dotted  black;
+        border-bottom: 10px dotted  black;
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+    </style>   
+</head>
+    
+<body>
+    
+<div class="row">
+    <div class="container">
+    <div class="col-sm-4"></div>
+      <div class="col-sm-4 mid">
+        <h1> EDIT COMPANY </h1>
+        <form action="edit-Company" method= "post" name = 'upload'>
+            <div>
+                <input type="hidden" name= 'oldCompany' value="<%=companyName%>">
+                <input type="hidden" name= 'memeID' value="<%=companyID%>">
+                <h6> Company Name</h6>
+                <input type="text" class="form-control" name = 'company' placeholder="<%=companyName%>"/> <br />
+                <h6> Company Address</h6>
+                <input type="text" class="form-control" name = 'address' placeholder="<%=companyAddress%>"/> <br />
+                <h6> Contact Person</h6>
+                <input type="text" class="form-control" name = 'person' placeholder="<%=contactPerson%>"/> <br />
+                <h6> Contact Person's Position</h6>
+                <input type="text" class="form-control" name = 'position' placeholder="<%=contactPosition%>"/> <br />
+                <h6> Company Person's Details</h6>
+                <input type="text" class="form-control" name = 'details' placeholder="<%=contactDetails%>"/> <br />
+                <h6> Company Tax Identification Number</h6>
+                <input type="text" class="form-control" name = 'taxNumber' placeholder="<%=taxNumber%>"/> <br />
+                <input type="submit" class="btn btn-success btn-block" value = 'Submit' style="background-color: skyblue" /> <br />
+            </div>
+        </form>
+        </div>
+        <div class="col-sm-4"> 
+        </div>
+      </div>
+</div>
+
+</body>
+</html>
+

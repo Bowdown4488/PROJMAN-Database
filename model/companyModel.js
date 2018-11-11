@@ -37,6 +37,13 @@ function addCompany(company, address, person, position, details, taxNumber, call
   });
 }
 
+function editCompany (oldCompany, company, address, person, position, details, taxNumber){
+    console.log("Old: " + oldCompany + "+ " + "New: " + company);
+    companyModel.findOneAndUpdate({companyName: oldCompany},{
+                    companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details, taxNumber: taxNumber
+                  }).then();
+}
+
 function findCompany(companyName){
    return companyModel.findOne({companyName: companyName});
 }
@@ -54,3 +61,5 @@ module.exports.addCompany = addCompany;
 module.exports.viewCompany = viewCompany;
 module.exports.findCompany = findCompany;
 module.exports.deleteCompany = deleteCompany;
+module.exports.editCompany = editCompany;
+

@@ -110,6 +110,30 @@ server.post('/companyView', urlencoder,function(req, resp){
         });
 //    });
 });
+
+server.post('/edit-Company', function(req,resp){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields) {
+        console.log("Starting update with old company name:" + fields.oldCompany);
+        companyModel.editCompany(fields.oldCompany, fields.company, fields.address, fields.person, fields.position, fields.details, fields.taxNumber);
+        console.log("finish update with new company name:" + fields.company);
+        
+        if(user === "ADMIN" || user === "admin"){
+            var admin = "Admin"
+            companyModel.viewCompany(function(list){
+                const data = { list:list };
+                    resp.render('./pages/home-page',{type: admin, data:data}); 
+                });
+        }
+        else{
+            var user = "Edit"
+            companyModel.viewCompany(function(list){
+                const data = { list:list };
+                    resp.render('./pages/home-page',{type: user, data:data}); 
+                });
+        }  
+    });
+}); 
     
 server.get('/companyView/:company', function(req, resp){
     console.log("Title passed: " + req.params.company);
@@ -123,7 +147,7 @@ server.get('/companyView/:company', function(req, resp){
 });
     
 server.get('/deleteCompany/:company', function(req, resp){
-    console.log("Title passed: " + req.params.company);
+    console.log("company passed: " + req.params.company);
     var deleteCompany = companyModel.deleteCompany(req.params.company);
     console.log("Company To be Deleted: " + req.params.company);
     console.log(deleteCompany);
@@ -144,6 +168,25 @@ server.get('/deleteCompany/:company', function(req, resp){
         }  
 });
     
+server.get('/editCompany/:company', function(req,resp){
+    var oldCompany = req.params.company;
+    console.log("company passed: " + oldCompany);
+    var findCompany = companyModel.findCompany(oldCompany);
+    findCompany.then((foundCompany)=>
+    {
+        console.log(foundCompany);
+        var company = foundCompany.companyName; 
+        var address = foundCompany.companyAddress;
+        var person = foundCompany.contactPerson;
+        var position = foundCompany.contactPosition;
+        var details = foundCompany.contactDetails;
+        var taxNumber = foundCompany.taxNumber;
+        
+        resp.render('./pages/editCompany',{ companyID: foundCompany._id, companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details, taxNumber: taxNumber});
+        
+    })
+}); 
+     
 }
 
 module.exports.Activate = userModule;
