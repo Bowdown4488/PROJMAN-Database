@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--    <base href = '/'>-->
+    <base href = '/'>
     <title>JGE</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +15,16 @@
             $("#master-modal").modal();
         });
       });
+        
+     $('#company').is(':enabled') 
     </script>
     
-    <style>   
+    <style>
+/*
+    .edit-span {
+      float: right;
+    }
+*/
     </style>   
 </head>
     
@@ -34,11 +41,12 @@
                 <span> Enter Individuals Details </span>
             </div>
             <div class="modal-body" style="padding:40px 50px;">
-                <form action = 'companyView' method="post">
-                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Last Name" /> <br />
-                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's First Name" /> <br />
-                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Position" /> <br />
-                    <input type="text" class="form-control" name = 'name' placeholder="Enter Employee's Gender" /> <br />
+                <form action = 'addMasterlist' method="post">
+                    <input type="text" class="form-control" name = 'lastName' placeholder="Enter Employee's Last Name" /> <br />
+                    <input type="text" class="form-control" name = 'firstName' placeholder="Enter Employee's First Name" /> <br />
+                    <input type="text" class="form-control" name = 'position' placeholder="Enter Employee's Position" /> <br />
+                    <input type="text" class="form-control" name = 'gender' placeholder="Enter Employee's Gender" /> <br />
+                    <input type="text" class="form-control" id = "company" name= 'company' value="<%=company%>"> <br />
                     <input type="submit" class="btn btn-success btn-block" value = 'Submit' style="background-color: skyblue" /> <br />
                  </form>
             </div>
@@ -58,6 +66,39 @@
             <button type="button" class="btn btn-default btn-lg" id="master-button">NEW ORDER</button>
         </div>
 <!--        <a href="/masterList/" type = "button" class = "btn btn-warning btn-xs btn-block" style="background-color: blue;" >Company Master List</a>  -->
+    </div>
+    
+      <div class="container bg-3" style="width: 1500px;">
+        <% for(var i=0;i<data.list.length;i++){ %>
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+            </div>
+                <div class="col-sm-8 sidenav">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">  
+                             <span class = "edit-span">
+                                <a href="/deleteCompany/<%= data.list[i].companyName %>" class="glyphicon glyphicon-trash">
+                                 Delete   ~
+                                </a></span>
+                                <span class = "edit-span">
+                                <a href="/editCompany/<%= data.list[i].companyName %>" class="glyphicon glyphicon-edit">
+                                 Edit
+                                </a></span>
+                               
+                        </div>
+                        <div class="panel-body">
+                                 <div class="companies">
+                                <span class = "lead"><h3>Master List entry of: <%= data.list[i].firstName %> <%= data.list[i].lastName %></h3></span>
+                                <span><h3 style = "float: left">Position: <%= data.list[i].position %>  </h3> </span> 
+                                <span><h3 style = "float: right">Gender: <%= data.list[i].gender %>  </h3> </span>
+                            </div>      
+                        </div> 
+                    </div>
+                </div>
+            <div class="col-sm-2 sidenav">
+            </div>
+        </div>
+        <% } %>
     </div>
 
 </body>

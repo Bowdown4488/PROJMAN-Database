@@ -11,7 +11,8 @@ const companySchema = mongoose.Schema({
        lastName: String,
        firstName: String,
        position: String,
-       Gender: String,
+       gender: String,
+       company: String, 
        fabricKind:String, //if shirt,pants,etc
        color: String,
        isCustom:String, //put the custom size
@@ -40,8 +41,15 @@ function addCompany(company, address, person, position, details, taxNumber, call
 function editCompany (oldCompany, company, address, person, position, details, taxNumber){
     console.log("Old: " + oldCompany + "+ " + "New: " + company);
     companyModel.findOneAndUpdate({companyName: oldCompany},{
-                    companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details, taxNumber: taxNumber
-                  }).then();
+        companyName: company, companyAddress: address, contactPerson: person, contactPosition: position, contactDetails: details, taxNumber: taxNumber
+    }).then();
+}
+
+function editCompanyArray (oldCompany, company){
+    console.log("Old: " + oldCompany + "+ " + "New: " + company);
+    companyModel.findOneAndUpdate({companyName: oldCompany},{
+        company: company
+    }).then();
 }
 
 function findCompany(companyName){
@@ -57,9 +65,32 @@ function deleteCompany(companyName){
     });
 }
 
+function addMasterlistCompany(lastName, firstName, position, gender, company, callback){
+     var newMasterlist = {
+        lastName: lastName,
+        firstName: firstName,
+        position: position,
+        gender: gender,
+        company: company
+        }
+     var find = company;
+     console.log("company " + newMasterlist.company);
+     companyModel.findOne({companyName: find}).then((companyFound) => {
+         companyFound.masterList.push(newMasterlist);
+         console.log("Company" + companyFound.companyName);
+         console.log("saving masterlist" + newMasterlist);
+         companyFound.save().then((companyFound)=>{ 
+             console.log("test");
+               callback();
+         });
+     })
+}  
+
+module.exports.addMasterlistCompany = addMasterlistCompany;
 module.exports.addCompany = addCompany;
 module.exports.viewCompany = viewCompany;
 module.exports.findCompany = findCompany;
 module.exports.deleteCompany = deleteCompany;
 module.exports.editCompany = editCompany;
+module.exports.editCompanyArray = editCompanyArray;
 
