@@ -10,13 +10,18 @@ const companySchema = mongoose.Schema({
     masterList:[{
        lastName: String,
        firstName: String,
+       middleInitial: String,
        position: String,
        gender: String,
-       company: String, 
-       fabricKind:String, //if shirt,pants,etc
-       color: String,
-       isCustom:String, //put the custom size
-       isNormal:String //put if small medium large
+       company: String,
+       profession: String,
+       department: String,
+       assignment: String,
+       top: String,
+       topColor: String,
+       bottom: String,
+       bottomColor: String,
+       setNumber: Number
     }]
 });
 
